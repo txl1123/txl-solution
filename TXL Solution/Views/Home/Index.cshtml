@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<h2>Index</h2>
+<input type="file" id="Import" title="导入文件" /> <div id="validurl" class="_msg_bottom" />
+<input type="button" id="Export" title="导出文件" value="导出文件" />
+<input type="button" id="SendEmail" value="发送邮件" />
+<input type="button" id="im" value="test" />
+<script type="text/javascript">
+    $("#Export").click(function () {
+     
+        window.location.href = "Home/ExportToExcel";
+    });
+
+    $("#SendEmail").click(function () {
+
+        window.location.href = "Home/SendEmailClick";
+    });
+
+    $("#im").click(function () {
+
+        window.location.href = "Home/ImportToDb";
+    });
+    $(document).ready(function () {
+        var filename = $("#Import").val();
+        if (filename) {
+            var extend = filename.substring(filename.lastIndexOf(".") + 1);
+            if (extend == "" || ("xls,xlsx".indexOf(extend.toLocaleLowerCase()) == -1)) {
+                $('#validurl').html("<span class='down'>文件格式不正确，文件格式应为xls,xlsx其中一种！</span>").show(500);
+                return;
+            }
+            
+        }
+        $("#Import").click(function () {
+     
+        window.location.href = "Home/ImportToDatatable?filename="+filename;
+        });
+    });
+
+</script>
