@@ -12,7 +12,7 @@ namespace TxlMvc
     public class UserProfileData
     {
         #region insert
-        public int insert(int? UserId, string UserName, string Password, int? Roleid)
+        public static  int insert(int? UserId, string UserName, string Password, int? Roleid)
         {
             string sql;
             int reval;
@@ -32,14 +32,14 @@ namespace TxlMvc
             return reval;
         }
 
-        public int insert(UserProfile users)
+        public static int insert(UserProfile users)
         {
             return insert(users.UserId, users.UserName, users.Password, users.RoleId);
         }
         #endregion
 
         #region update
-        public int update(int? UserId, string UserName, string Password, int? Roleid)
+        public static int update(int? UserId, string UserName, string Password, int? Roleid)
         {
             string sql;
             int reval;
@@ -59,7 +59,7 @@ namespace TxlMvc
             return reval;
         }
 
-        public int update(UserProfile users)
+        public static  int update(UserProfile users)
         {
             return update(users.UserId, users.UserName, users.Password, users.RoleId);
         }
@@ -102,7 +102,7 @@ namespace TxlMvc
         #endregion
 
         #region Login
-        public bool CheckLogin(LoginModel lm)
+        public static bool CheckLogin(LoginModel lm)
         {
             int reval;
             string sql = "select * from UserProfile where username=" + lm.UserName + " and password=" + lm.Password;

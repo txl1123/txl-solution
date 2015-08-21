@@ -21,7 +21,7 @@ namespace TxlMvc.Controllers
         private MovieDbContext db = new MovieDbContext();
         //
         // GET: /Home/
-
+        
         public ActionResult Index()
         {
             return View();
@@ -157,29 +157,46 @@ namespace TxlMvc.Controllers
         }
         #endregion
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+        
+            return View();
+        }
+        #region "登录注册"
+        /// <summary>
+        /// 登录验证
+        /// </summary>
+        /// <param name="userInfo"></param>
+        /// <returns></returns>
+        [HttpPost]
         public ActionResult Login(LoginModel userInfo)
         {
             string errorMsg = "";
-           // 登录验证前判断用户名和密码是否符合输入要求
-            if (!ModelState.IsValid)
-            {
-                List<string> keys = ModelState.Keys.ToList();
-                foreach (var key in keys)
-                {
-                    if (ModelState[key].Errors.Count > 0)
-                    {
-                        errorMsg = ModelState[key].Errors[0].ErrorMessage;
-                        break;
-                    }
-                }
-                return Json(new { success = false, msg = errorMsg },
-                    JsonRequestBehavior.AllowGet);
-            }
+          
+            
             bool success = UserHelper.Login(userInfo,out errorMsg);
 
             return Json(new { success = success, msg = errorMsg },
                 JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(UserProfile userInfo)
+        {
+            string errorMsg = "";
+           
+            bool success = UserHelper.Register(userInfo, out errorMsg);
+
+            return Json(new { success = success, msg = errorMsg },
+                JsonRequestBehavior.AllowGet);
+ 
+        }
+        #endregion 
     }
 
 }

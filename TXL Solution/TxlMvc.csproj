@@ -226,6 +226,7 @@
     <Content Include="Views\ExcelTest\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\TreeTest\Index.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

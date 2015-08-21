@@ -18,7 +18,7 @@ namespace TxlMvc.Helper
         /// <returns></returns>
         public static string Encrypt(string encrytionString)
         {
-            var bytes = Encoding.UTF8.GetBytes(encrytionString);
+            var bytes = Encoding.ASCII.GetBytes(encrytionString);
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] result = md5.ComputeHash(bytes);
             return System.Text.Encoding.Default.GetString(result);
