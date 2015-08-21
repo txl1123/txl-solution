@@ -12,29 +12,29 @@ namespace TxlMvc
     public class UserProfileData
     {
         #region insert
-        public static  int insert(int? UserId, string UserName, string Password, int? Roleid)
+        public static  int insert( string UserName, string Password, int? Roleid)
         {
             string sql;
             int reval;
-            sql = "insert into UserProfile(userid,username,password,roleid) values (@userid,@username,@password,@roleid)";
+            sql = "insert into UserProfile(username,password,roleid) values (@username,@password,@roleid);";
             SqlParameter[] para = new SqlParameter[]{
                 
-                new SqlParameter("@userid",SqlDbType.Int),
+               
                 new SqlParameter("@username",SqlDbType.VarChar,200),
                 new SqlParameter("@password",SqlDbType.VarChar,200),
                 new SqlParameter("@roleid",SqlDbType.Int)
             };
-            para[0].Value = UserId;
-            para[1].Value = UserName;
-            para[2].Value = Password;
-            para[3].Value = Roleid;
+            para[0].Value = UserName;
+            para[1].Value = Password;
+            para[2].Value = Roleid;
+      
             reval = SqlHelper.ExecteNonQueryText(sql, para);
             return reval;
         }
 
         public static int insert(UserProfile users)
         {
-            return insert(users.UserId, users.UserName, users.Password, users.RoleId);
+            return insert( users.UserName, users.Password, users.RoleId);
         }
         #endregion
 
