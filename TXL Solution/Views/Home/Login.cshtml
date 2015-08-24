@@ -5,7 +5,7 @@
 @model TxlMvc.Models.LoginModel
 <h2>Login</h2>
 <fieldset>
-        <legend>“登录”表单</legend>
+        <legend>“登录”</legend>
         <ol>
              <li>
                用户名： <input type="text" id="username" />
@@ -29,9 +29,16 @@
         loginparam["UserName"] = $("#username").val();
         loginparam["Password"] = $("#password").val();
         $.ajax({
-            type:"POST",
-            url:"/Home/LoginIn",
-            data:loginparam
+            type: "POST",
+            url: "/Home/Login",
+            data: loginparam,
+            success: function (data) {
+                if (data.success)
+                { window.location.href = "/TreeTest/Index"; }
+                else {
+                    alert("登录失败 " + data.msg);
+                }
+            }
 
         });
     });

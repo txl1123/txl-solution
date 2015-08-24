@@ -12,7 +12,7 @@ namespace TxlMvc
     public class UserProfileData
     {
         #region insert
-        public static  int insert( string UserName, string Password, int? Roleid)
+        public  int insert( string UserName, string Password, int? Roleid)
         {
             string sql;
             int reval;
@@ -32,7 +32,7 @@ namespace TxlMvc
             return reval;
         }
 
-        public static int insert(UserProfile users)
+        public  int insert(UserProfile users)
         {
             return insert( users.UserName, users.Password, users.RoleId);
         }
@@ -67,7 +67,7 @@ namespace TxlMvc
 
         #region select
         /// <summary>
-        /// 
+        /// 按content字段查询所需内容
         /// </summary>
         /// <param name="top"></param>
         /// <param name="content">需要的列名</param>
@@ -104,9 +104,9 @@ namespace TxlMvc
         #region Login
         public static bool CheckLogin(LoginModel lm)
         {
-            int reval;
-            string sql = "select * from UserProfile where username=" + lm.UserName + " and password=" + lm.Password;
-            reval = SqlHelper.ExecteNonQueryText(sql, null);
+            
+            string sql = "select count(*) from UserProfile where username='" + lm.UserName + "' and password='" + lm.Password+"'";
+            int reval =Convert.ToInt16( SqlHelper.ExecuteScalarText(sql, null));
             if (reval > 0)
             {
                 return true;

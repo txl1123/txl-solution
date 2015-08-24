@@ -40,9 +40,19 @@ namespace TxlMvc.Helper
                 RoleId=1//权限角色
             };
             int registerState;
+            UserProfileData userPorfile=new UserProfileData();
+            var userList=userPorfile.select(0," username ","username='"+regInfo.UserName+"'",null);
+            bool  isNewName = true ;
+            if (userList.Count > 0)
+            {
+                isNewName = false;
+                errorMsg = "该用户名已注册";
+                return isNewName;
+                
+            }
             try
             {
-                registerState = UserProfileData.insert(regInfo);
+                registerState = userPorfile.insert(regInfo);
                 if (registerState > 0)
                 {
                     return true;

@@ -11,8 +11,6 @@ namespace TxlMvc.Helper
 {
     /// <summary>
     /// 描述：发送邮件类
-    /// 作者：路晓阳
-    /// 时间：2010-06-11 9:41:38 AM
     /// </summary>
     public class EmailHelper
     {

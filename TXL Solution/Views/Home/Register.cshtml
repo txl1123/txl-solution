@@ -9,11 +9,11 @@
         <legend>注册</legend>
         <ol>
             <li>
-               用户名： <input type="text" id="username" />
+               用户名： <input type="text" id="username" /><Text id="tip"></Text>
                 
             </li>
             <li>
-               密码：<input type="password" id="password" />
+               密码：<input type="password" id="password" /><Text id="pwtip"></Text>
                
             </li>
        
@@ -21,6 +21,19 @@
         <input type="button" value="注册" id="register" />
     </fieldset>
     <script type="text/javascript" >
+        $(function () {
+            
+            $("#username").bind("blur", function () {
+                if ($(this).val().length == 0)
+                    $("#tip").html("用户名不能为空！").css("color", "red");
+            });
+            $("#password").bind("blur", function () {
+                if ($(this).val().length < 6) {
+                    $("#pwtip").html("密码不得小于6位").css("color", "red");
+                }
+            });
+        });
+    //提交注册内容
         $("#register").click(function () {
             var registerparam = {};
             registerparam["UserName"] = $("#username").val();

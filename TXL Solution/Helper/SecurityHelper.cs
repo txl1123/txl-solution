@@ -12,16 +12,21 @@ namespace TxlMvc.Helper
     public class SecurityHelper
     {
         /// <summary>
-        /// 简单MD5加密
+        /// MD5 32位加密
         /// </summary>
         /// <param name="encrytionString"></param>
         /// <returns></returns>
         public static string Encrypt(string encrytionString)
         {
-            var bytes = Encoding.ASCII.GetBytes(encrytionString);
+            var bytes =System.Text.Encoding.UTF8.GetBytes(encrytionString);
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(bytes);
-            return System.Text.Encoding.Default.GetString(result);
+            byte[] s = md5.ComputeHash(bytes);
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < s.Length; i++)
+            {
+                result.Append(s[i].ToString("x").PadLeft(2, '0'));
+            }
+            return result.ToString();
             //FormsAuthentication.HashPasswordForStoringInConfigFile(encrytionString,"MD5");
             //return Convert.ToBase64String(bytes);
             
