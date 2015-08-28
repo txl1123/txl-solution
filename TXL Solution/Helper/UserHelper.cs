@@ -4,11 +4,15 @@ using System.Linq;
 using System.Web;
 using TxlMvc.Models;
 using TxlMvc.Helper;
+using System.Web.Security;
 namespace TxlMvc.Helper
 {
     public class UserHelper
     {
+        //当前用户信息
+        private static string CURRENT_USER_INFO = "CurrentUserInfo";
         private UsersContext udb = new UsersContext();
+        //登录
         public static bool Login(LoginModel userInfo,out string errorMsg)
         {
             errorMsg = "";
@@ -29,7 +33,7 @@ namespace TxlMvc.Helper
                 return false;
             }
         }
-
+        //注册
         public static bool Register(UserProfile userInfo, out string errorMsg)
         {
             errorMsg = "";
@@ -65,5 +69,30 @@ namespace TxlMvc.Helper
                 return false;
             }
         }
+
+        #region 保存当前用户信息
+        ///// <summary>
+        ///// 将用户信息写入缓存以及Cookies
+        ///// </summary>
+        ///// <param name="onlineUser">当前用户信息</param>
+        //private static void SetCurrentUserInfo(OnlineUser onlineUser)
+        //{
+        //    HttpContext.Current.Session[CURRENT_USER_INFO] = onlineUser;
+        //    HttpContext.Current.Session.Timeout = AUTH_TIMEOUT; // 注意此处是设置所有session的过期时间       
+
+        //    DateTime expiration = DateTime.Now;s
+        //    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+        //        1,
+        //        onlineUser.Username,
+        //        expiration,
+        //        expiration.AddMinutes(AUTH_TIMEOUT),
+        //        true,
+        //        onlineUser.OnlineID.ToString());
+
+        //    HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Value = FormsAuthentication.Encrypt(ticket);
+        //    HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = ticket.Expiration;
+        //    HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].HttpOnly = true;
+        //}
+        #endregion
     }
 }

@@ -155,6 +155,7 @@
     <Content Include="Content\css\awesomeStyle\awesome.css" />
     <Content Include="Content\css\awesomeStyle\img\loading.gif" />
     <Content Include="Content\css\demo.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\css\metroStyle\img\line_conn.png" />
     <Content Include="Content\css\metroStyle\img\loading.gif" />
     <Content Include="Content\css\metroStyle\img\metro.gif" />
@@ -175,8 +176,10 @@
     <Content Include="Content\css\zTreeStyle\img\zTreeStandard.gif" />
     <Content Include="Content\css\zTreeStyle\img\zTreeStandard.png" />
     <Content Include="Content\css\zTreeStyle\zTreeStyle.css" />
+    <Content Include="Content\images\bg-login.jpg" />
     <Content Include="Content\images\left_menuForOutLook.gif" />
     <Content Include="Content\images\left_menuForOutLook.png" />
+    <Content Include="Content\images\login-box.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
