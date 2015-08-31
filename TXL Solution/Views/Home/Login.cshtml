@@ -4,26 +4,19 @@
 }
 
 @model TxlMvc.Models.LoginModel
-
-
-        <div class="login-box-bg">
-        <div class="logintxt">用户登录</div>
-            <img src="../../Content/images/login-box.jpg" />
-        <ul>
-             <li>
-               用户名： <input type="text" id="username" />
-                
-            </li>
-            <li>
-               密码：<input type="password" id="password" />
-               
-            </li>
-           
-        </ul>
-        </div>
-        
-        <div class="login-box-bottom">
-        <input type="button" value="立即登录" id="login" class="loginbtn"/>
+<div class="login-box-bg">
+    <div class="logintxt">
+        用户登录</div>
+    <img alt="" src="../../Content/images/login-box.jpg" />
+    <ul>
+        <li>用户名： <input type="text" id="username" class="login-input"/>
+        </li>
+        <li>密&nbsp;码：<input type="password" id="password" class="login-input" />
+        </li>
+    </ul>
+</div>
+<div class="login-box-bottom">
+    <input type="button" value="立即登录" id="login" class="loginbtn"/>
 
     <p>
         @Html.ActionLink("Register", "Register") (如果你没有帐户)。

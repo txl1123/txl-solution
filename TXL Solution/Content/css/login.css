@@ -3,13 +3,15 @@
     background:url("../images/bg-login.jpg") no-repeat;
     font: 12px/1.2em Arial,'Microsoft YaHei'， Helvetica, simsun, sans-serif;
     background-size: 100%;
+    /*background-image: -webkit-linear-gradient(top, #0e68a3 53.24px, #1787b1, #1186af);
+  background-image: linear-gradient(top, #0e68a3 53.24px, #1787b1, #1186af);*/
 }
 
 .login-box
 {
     box-shadow: 1px 1px 2px #77c5f3,-1px -1px 2px #77c5f3;
     width: 340px;
-    height: 406px;
+    height: 404px;
     border: solid 1px #7eb3d3;
     position: relative;
     left: 52%;
@@ -19,6 +21,9 @@
     background:#fff;
     
 }
+.login-box ul{list-style:none;font-size:20px;color:#136690;}
+.login-box ul>li{width:260px;padding:10px 0 10px 10px;}
+.login-input{height:22px;border:0;}
 .logintxt{color:#136690;padding:20px 0 0 20px;font :24px "Microsoft YaHei";}
 .login-box-bg{ background:#bee3f6;height:68%;margin:0;border-radius:4px;}
 /*.login-box-bottom{}*/

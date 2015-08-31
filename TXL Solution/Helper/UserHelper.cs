@@ -71,28 +71,65 @@ namespace TxlMvc.Helper
         }
 
         #region 保存当前用户信息
-        ///// <summary>
-        ///// 将用户信息写入缓存以及Cookies
-        ///// </summary>
-        ///// <param name="onlineUser">当前用户信息</param>
-        //private static void SetCurrentUserInfo(OnlineUser onlineUser)
-        //{
-        //    HttpContext.Current.Session[CURRENT_USER_INFO] = onlineUser;
-        //    HttpContext.Current.Session.Timeout = AUTH_TIMEOUT; // 注意此处是设置所有session的过期时间       
+        /// <summary>
+        /// 将用户信息写入缓存以及Cookies
+        /// </summary>
+        /// <param name="onlineUser">当前用户信息</param>
+        private static void SetCurrentUserInfo(UserProfile onlineUser)
+        {
+            HttpContext.Current.Session[CURRENT_USER_INFO] = onlineUser;
+            //HttpContext.Current.Session.Timeout = AUTH_TIMEOUT; // 注意此处是设置所有session的过期时间       
 
-        //    DateTime expiration = DateTime.Now;s
-        //    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-        //        1,
-        //        onlineUser.Username,
-        //        expiration,
-        //        expiration.AddMinutes(AUTH_TIMEOUT),
-        //        true,
-        //        onlineUser.OnlineID.ToString());
+            //DateTime expiration = DateTime.Now;s
+            //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+            //    1,
+            //    onlineUser.Username,
+            //    expiration,
+            //    expiration.AddMinutes(AUTH_TIMEOUT),
+            //    true,
+            //    onlineUser.OnlineID.ToString());
 
-        //    HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Value = FormsAuthentication.Encrypt(ticket);
-        //    HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = ticket.Expiration;
-        //    HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].HttpOnly = true;
-        //}
+            //HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Value = FormsAuthentication.Encrypt(ticket);
+            //HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = ticket.Expiration;
+            //HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].HttpOnly = true;
+        }
+        #endregion
+
+        #region 获取当前用户信息
+        /// <summary>
+        /// 获取当前用户信息
+        /// </summary>
+        /// <returns>当前用户信息</returns>
+        public static UserProfile GetCurrentUserInfo()
+        {
+            // 如缓存中有当前用户信息则直接从缓存中返回
+            UserProfile onlineUser = HttpContext.Current.Session[CURRENT_USER_INFO] as UserProfile;
+
+            if (onlineUser != null)
+            {
+                // 如缓存中有当前用户信息则自动进行登录授权
+                if (!HttpContext.Current.Request.IsAuthenticated)
+                    SetCurrentUserInfo(onlineUser);
+                return onlineUser;
+            }
+
+            // 如缓存中没有当前用户信息则搜索Cookies
+            if (HttpContext.Current.Request.IsAuthenticated)
+            {
+                FormsAuthenticationTicket ticket = ((FormsIdentity)HttpContext.Current.User.Identity).Ticket;
+                int onlineID = 0;
+                if (int.TryParse(ticket.UserData, out onlineID))
+                {
+                    // 根据onlineID从MongoDb中获取当前用户信息
+                   // onlineUser = OnlineHelper.GetOnlineUser(onlineID);
+                    // 保存至缓存中
+                    HttpContext.Current.Session[CURRENT_USER_INFO] = onlineUser;
+                    return onlineUser;
+                }
+            }
+
+            return null;
+        }
         #endregion
     }
 }
