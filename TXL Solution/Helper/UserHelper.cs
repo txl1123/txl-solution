@@ -11,6 +11,7 @@ namespace TxlMvc.Helper
     {
         //当前用户信息
         private static string CURRENT_USER_INFO = "CurrentUserInfo";
+        private static int AUTH_TIMEOUT = 20;
         private UsersContext udb = new UsersContext();
         //登录
         public static bool Login(LoginModel userInfo,out string errorMsg)
@@ -78,20 +79,20 @@ namespace TxlMvc.Helper
         private static void SetCurrentUserInfo(UserProfile onlineUser)
         {
             HttpContext.Current.Session[CURRENT_USER_INFO] = onlineUser;
-            //HttpContext.Current.Session.Timeout = AUTH_TIMEOUT; // 注意此处是设置所有session的过期时间       
+            HttpContext.Current.Session.Timeout = AUTH_TIMEOUT; // 注意此处是设置所有session的过期时间       
 
-            //DateTime expiration = DateTime.Now;s
-            //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-            //    1,
-            //    onlineUser.Username,
-            //    expiration,
-            //    expiration.AddMinutes(AUTH_TIMEOUT),
-            //    true,
-            //    onlineUser.OnlineID.ToString());
+            DateTime expiration = DateTime.Now;
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                1,
+                onlineUser.UserName,
+                expiration,
+                expiration.AddMinutes(AUTH_TIMEOUT),
+                true,
+                onlineUser.UserId.ToString());
 
-            //HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Value = FormsAuthentication.Encrypt(ticket);
-            //HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = ticket.Expiration;
-            //HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].HttpOnly = true;
+            HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Value = FormsAuthentication.Encrypt(ticket);
+            HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = ticket.Expiration;
+            HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].HttpOnly = true;
         }
         #endregion
 
@@ -129,6 +130,22 @@ namespace TxlMvc.Helper
             }
 
             return null;
+        }
+        #endregion
+
+        #region 刷新登录授权超时时间，用于辅助前端判断是否登录授权过期
+        /// <summary>
+        /// 刷新登录授权超时时间，用于辅助前端判断是否登录授权过期
+        /// </summary>
+        public static void RefreshAuthTimeout()
+        {
+            if (HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName] == null)
+                return;
+
+            DateTime timeout = DateTime.Now.AddMinutes(AUTH_TIMEOUT).AddSeconds(30);
+
+            HttpContext.Current.Response.Cookies["Auth"].Value = timeout.ToString("yyyy-MM-dd hh:mm:ss");
+            HttpContext.Current.Response.Cookies["Auth"].Expires = timeout;
         }
         #endregion
     }

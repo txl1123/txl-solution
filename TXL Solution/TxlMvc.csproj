@@ -130,6 +130,7 @@
     <Compile Include="DataSql\ModuleData.cs" />
     <Compile Include="DataSql\PriceTypeData.cs" />
     <Compile Include="DataSql\UserProfileData.cs" />
+    <Compile Include="Extensions\AuthorizeExAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,7 +217,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Indextest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\css\awesomeStyle\awesome.less" />
@@ -232,6 +233,8 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\shares\_LoginLayout.cshtml" />
     <Content Include="Views\Home\View1.cshtml" />
+    <Content Include="Views\Home\shares\_IndexLayout.cshtml" />
+    <Content Include="Views\TreeTest\View1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
