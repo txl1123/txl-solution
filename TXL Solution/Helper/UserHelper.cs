@@ -26,7 +26,9 @@ namespace TxlMvc.Helper
             bool loginstate;
             try
             {
-                return loginstate = UserProfileData.CheckLogin(loginInfo);
+                 loginstate = UserProfileData.CheckLogin(loginInfo);
+                if(!loginstate){errorMsg="用户名或密码错误！请重试！";}
+                return loginstate;
             }
             catch (Exception ex)
             {

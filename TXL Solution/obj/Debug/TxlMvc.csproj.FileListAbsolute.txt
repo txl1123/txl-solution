@@ -47,4 +47,3 @@ E:\小丽\txl-solution\TXL Solution\obj\Debug\MvcApplication3.Resource.email.res
 E:\小丽\txl-solution\TXL Solution\obj\Debug\TxlMvc.csproj.GenerateResource.Cache
 E:\小丽\txl-solution\TXL Solution\obj\Debug\MvcApplication3.dll
 E:\小丽\txl-solution\TXL Solution\obj\Debug\MvcApplication3.pdb
-E:\小丽\txl-solution\TXL Solution\obj\Debug\TxlMvc.csprojResolveAssemblyReference.cache

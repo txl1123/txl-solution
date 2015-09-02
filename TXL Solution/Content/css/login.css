@@ -28,4 +28,4 @@
 .login-box-bg{ background:#bee3f6;height:68%;margin:0;border-radius:4px;}
 /*.login-box-bottom{}*/
 .login-box-bottom input,.login-box-bottom p{display:table;margin:0 auto;position: relative;  top: 35px;}
-.loginbtn{background:#136690;width:223px;height:47px;color:#fff;font:23px "Microsoft YaHei";margin-top:20px; letter-spacing:.1em;border:0;}
+.loginbtn{background:#136690;width:223px;height:47px;color:#fff;font:23px "Microsoft YaHei";margin-top:20px; letter-spacing:.1em;border:0;  cursor: pointer;}

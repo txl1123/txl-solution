@@ -33,9 +33,10 @@
             data: loginparam,
             success: function (data) {
                 if (data.success)
-                { window.location.href = "/TreeTest/Index"; }
+                { window.location.href = "/Home/Index"; }
                 else {
-                    alert("登录失败 " + data.msg);
+                    alert("登录失败: " + data.msg);
+                     window.location.href = "/Home/Login"; 
                 }
             }
 

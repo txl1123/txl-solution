@@ -24,6 +24,7 @@ namespace TxlMvc.Controllers
         
         public ActionResult Index()
         {
+            //ViewBag["menu"] = menu;
             return View();
         }
         #region "导出Excel文件"
